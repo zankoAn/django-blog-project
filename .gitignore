@@ -1,0 +1,6 @@
+*.sqlite3
+**/__pycache__/
+*_versions
+*.pyc
+media/
+post/migrations/00*.py

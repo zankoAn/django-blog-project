@@ -1,0 +1,39 @@
+{% load static %}
+<div class="container-fluid">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark" id="nav-style">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" id="toggler-btn" onclick="toggle_icon()">
+      <span class="bi bi-list bi-9x" id="toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto ms-auto justify-content-center mb-2 mt-3">
+				<li class="nav-item mx-2">
+					<a class="navbar-brand text-light" href="{% url 'Posts:home-page'%}"><img  src="{% static 'images/developer-icon.png' %}" height="40"  loading="lazy"/></a>
+				</li>
+				<li class="nav-item mx-2">
+					<a class="navbar-brand text-light" href="{% url 'Posts:home-page'%}">Posts</a>
+				</li>
+				<li class="nav-item mx-2">
+					<a class="navbar-brand text-light" href="{% url 'Posts:home-page'%}">Add New Post</a>
+        </li>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item mx-2">
+            <a class="navbar-brand text-light" href="{% url 'Account:logout'%}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item mx-2">
+            <a class="navbar-brand text-light" href="{% url 'Account:login'%}">Login</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="navbar-brand text-light" href="{% url 'Account:signup'%}">Sign Up</a>
+          </li>
+        {% endif %}
+			</ul>
+			<form class="navbar-form d-flex flex-row col-md-5 mx-auto" id="search-bar" method="get">
+				<input class="form-control bg-outline-secondary" type="text" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-secondary my-2 my-sm-0" id="search-button" type="submit">Search</button>
+			</form>	
+  	</div>
+	</nav>
+</div>
+
