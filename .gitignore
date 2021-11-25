@@ -1,6 +1,9 @@
 *.sqlite3
 **/__pycache__/
+__pypackages__/
 *_versions
 *.pyc
-media/
+media/*
 post/migrations/00*.py
+.env
+.venv
