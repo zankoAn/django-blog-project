@@ -31,7 +31,7 @@ class UserSignUpForm(forms.Form):
         label_suffix="",
         error_messages={"required":"please enter the username or email"},
         widget=forms.TextInput(
-            attrs={"class":"form-style", "placeholder":"Username", "autocomplete":"on", "type":"text"}
+            attrs={"class":"form-style", "placeholder":"Username", "autocomplete":"off", "type":"text"}
         )
     )
 
