@@ -14,23 +14,23 @@
 {% block content %}
 	<div class="container " id="login-form">
     <div class="row">
-		  <div class="d-flex col col-sm-6 col-md-6 col-lg-6 col-xl-6 text-center">
+      <div class="d-flex col col-sm-6 col-md-6 col-lg-6 col-xl-6 text-center">
         <form method="post" action="" novalidate>
-					{% csrf_token %}
-  				<!--  Login mesage -->
+          {% csrf_token %}
+
+          <!--  Login mesage -->
           {% if request_to == "Login" %}
- 				  		<h3>Login Here</h3>
+              <h3>Login Here</h3>
           {% elif request_to == "SignUp" %}
- 				  		<h3>Sing Up Here</h3>
+              <h3>Sing Up Here</h3>
           {% endif %}
-            
 
-					<!--Loop on message --!>
-					{% for field in form.visible_fields %}
-          	<div class="input-field" id="form-item">
+          <!--Loop on message -->
+          {% for field in form.visible_fields %}
+            <div class="input-field" id="form-item">
+              <label for="{{ field.label }}">{{ field.label}}</label>
 
-						  <label for="{{ field.label }}">{{ field.label}}</label>
-							<!-- Add eye icon for passowrd input --!>
+              <!-- Add eye icon for passowrd input -->
               {% if field.name == "username" %} <span> <i class="bi bi-person-circle" aria-hidden="true"  type="button" id="username-icon"></i></span>
               {% elif field.name == "email" %}<span><i class="bi bi-person-circle" aria-hidden="true"  type="button" id="email-icon"></i></span>
               {% elif field.name == "password" %}
@@ -47,7 +47,7 @@
             
               {{ field }}
               {% if form.is_bound %}
-                <!-- Change field class if get error --!>
+                <!-- Change field class if get error -->
                 {% if field.errors %}
                   <div id="invalid-err">
                     {{ field.errors | striptags }}
@@ -63,39 +63,39 @@
                   </script>
                 {% endif %}
               {% endif %}
-						</div>
-					{% endfor %}
+            </div>
+          {% endfor %}
 
-					<!-- Show login button --!>
-				  <div class="text-center ">
-						<button class="btn login__submit" id="submit_">
+          <!-- Show login button --!>
+          <div class="text-center ">
+            <button class="btn login__submit" id="submit_">
               {% if request_to == "Login" %}
-								<span class="tt">Log In</span>
+                <span class="tt">Log In</span>
               {% elif request_to == "SignUp" %}
-								<span class="tt">Sign Up</span>
+                <span class="tt">Sign Up</span>
               {% endif %}
-							<i class="button__icon bi bi-chevron-right"></i>
-						</button>	
-			    </div>
+              <i class="button__icon bi bi-chevron-right"></i>
+            </button>	
+          </div>
 
         </form>
-			</div>
-	 		<div class="hr"></div>
+      </div>
+      <div class="hr"></div>
 
       {% if request_to == "Login" %}
-  			<!-- Show footer for forget or Sign in.. --!>
-		  	<div class="foot-link">
-			  	<a href="--!>forgot">Forgot Password?</a>
-  			</div>
+        <!-- Show footer for forget or Sign in.. -->
+        <div class="foot-link">
+          <a href="--!>forgot">Forgot Password?</a>
+        </div>
 
-			  <div class="foot-link">
-				  <a href="{% url 'Account:signup' %}">Don't have an account? <b>Sign up</b></a>
-  			</div>
+        <div class="foot-link">
+          <a href="{% url 'Account:signup' %}">Don't have an account? <b>Sign up</b></a>
+        </div>
       {% elif request_to == "SignUp" %}
-			  <div class="foot-link">
-				  <a href="{% url 'Account:login' %}">forgot">You already have an account? <b>Log In</b></a>
-  			</div>
+        <div class="foot-link">
+          <a href="{% url 'Account:login' %}">forgot">You already have an account? <b>Log In</b></a>
+        </div>
       {% endif %}
     </div>
-	</div> 
+  </div> 
 {% endblock content %}
