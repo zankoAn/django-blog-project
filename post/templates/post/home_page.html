@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block js_script %}
-  <script src={% static "post/js/like.js" %}></script>
+  <script src="{% static 'post/js/like.js' %}"></script>
 {% endblock js_script %}
 
 {% block custom_tag %}
@@ -10,45 +10,66 @@
 {% endblock custom_tag %}
 
 
-{% block content %} 
-	<div class="container">
-  	<div class="row g-5" id="row-posts">
-			{% for post in Posts %}
-					<div class="col-12 col-md-6 col-lg-6 d-flex">
-						<div class="card text-center rounded pb-2" id="post-card">
-							<a class="card-block STRetched-link text-decoration-none" href="{{ post.get_absolute_url  }}" >
-								<img src="{{ post.avatar.url }}" class="card-img-top example-card-img-responsive" id="img-fluid">
-								<div class="card-body">
-									<h5 class="card-title fw-bolder mb-4" style="color:#f0effe"> {{ post.title|safe }}</h5>
-									<p class="fs-5 text-end fw-light text-muted" id="summary-card">{{ post.summary | safe}}</p>
-									<br>
-								</div>
-							</a>
-							<div class="card-footer row text-center">
-								<div class="col">
-				       	  <div class="text-info small"> {{post.publish_date|date:' M d, Y' }}</div>
-  				  			<div class="text text-muted small bi bi-clock"> Publish Date</div>
-								</div>
-					     	<div class="col">
-				       	  <div class="text-info">{{ post.views }}</div>
-					       	<div class="text-uppercase text-muted small bi bi-eye"> View</div>
-					     	</div>
-								<div class="col">
-  								<div class="text-info" id="total-likes-{{ post.id }}">{{ post.total_likes }}</div>
-                    {% if post.id in user_can_like %}
-                      <button type="button" id="btn-unlike" class="bi bi-heart" data-stat="{{ post.id }}"></button>
-                    {% else %}
-                      <button type="button" id="btn-like" class="bi bi-heart-fill" data-stat="{{ post.id }}"></button>
-                    {% endif %}
-								</div>
-								<div class="col">
-									<div class="text-info">{{ post.total_comments }}</div>
-									<div class="text-uppercase text-muted small bi bi-chat"> Comment</div>
-								</div>
-							</div>
-						</div>
-	   	    </div>
-			{% endfor %}
-	  </div>
+{% block content %}
+<div class="text-center" id="info-me">
+  <h1>#!z@nko...;</h1>
+  <p>hello everyone I'm zanko and this is my blog, you can read my articles and enjoy it, if you liked my articles,
+    Please click the like button and send me the beauty comments</p>
+</div>
+
+<div class="container">
+  <div class="row g-5" id="row-posts">
+    {% for post in Posts %}
+      <div class="col-12 col-md-6 col-lg-6 d-flex">
+        <div class="card text-center rounded " id="post-card">
+          <a class="card-block STRetched-link text-decoration-none" href="{{ post.get_absolute_url  }}">
+            <img src="{{ post.avatar.url }}" class="card-img-top example-card-img-responsive">
+
+            <!-- Post Summary -->
+            <div class="card-body">
+              <h5 class="card-title fw-bolder mb-2" style="color:#f0effe"> {{ post.title | safe }}</h5>
+              <p class="fs-5 text-end fw-light text-muted" id="summary-card">{{ post.summary | safe}}</p>
+              <br>
+            </div>
+          </a>
+
+          <!-- Footer Items -->
+          <div class="card-footer row text-center">
+            <div class="col">
+              <div class="text-info small"> {{post.publish_date|date:' M d, Y' }}</div>
+              <div class="text text-muted small bi bi-clock"> Publish Date</div>
+            </div>
+
+            <div class="col">
+              <div class="text-secondary">{{ post.views }}</div>
+              <div class="text-uppercase text-muted small bi bi-eye"> View</div>
+            </div>
+
+            <div class="col">
+              {% if request.user.is_authenticated%}
+                <div>
+                  <label class="text-secondary bt-2" id="total-likes-{{ post.id }}"> {{ post.total_likes }}</label>
+                </div>
+                {% if post.id in user_can_like %}
+                  <button type="button" id="btn-unlike" class="bi bi-heart" data-stat="{{ post.id }}"></button>
+                {% else %}
+                  <button type="button" id="btn-like" class="bi bi-heart-fill" data-stat="{{ post.id }}"></button>
+                {% endif %}
+              {% else %}
+                <div>
+                  <label class="bi bi-heart text-secondary"><br> {{ post.total_likes }}</label>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="col">
+              <div class="text-info">{{ post.total_comments }}</div>
+              <div class="text-uppercase text-muted small bi bi-chat"> Comment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
+</div>
 {% endblock content %}
