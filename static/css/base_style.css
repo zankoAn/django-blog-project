@@ -1,10 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
-
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;	
-	font-family: Raleway, sans-serif;
 }
 
 html {
@@ -24,16 +21,25 @@ body {
 }
 
 
-/* Info */
-#intro {
-  display: flex;
-  padding-top: 40px; 
+/* Header site font 
+--------------------------------------------------*/
+#info-me > h1,
+#info-me > p {
+  margin: auto;
+  font-family: Creepster;
+  font-size: 1.9rem;
+  line-height: 4rem;
+  width: 28em;
 }
 
-#info-me{
-	padding:0px 0px 100px;
-}
 
+/* Header site style
+--------------------------------------------------*/
+#info-me {
+  color: #c4dbed;
+  margin-bottom:150px;  
+  margin-top:-40px;
+}
 
 .card-footer {
   width: 100%;
@@ -41,34 +47,58 @@ body {
   flex-direction: row;
 }
 
-/* margin betwin posts and padding bottom and top*/
-#row-posts {
-  margin-bottom:160px;
+
+/* Notify Message
+--------------------------------------------------*/
+#intro {  
+  font-family:ZenAntique;
+  padding-top:7rem;
+  text-align: center; 
 }
 
-/* Posts */
+
+/* Post font
+--------------------------------------------------*/
+.card-title {
+  font-family: VazirBold;
+}
+
+#summary-card {
+  font-family: Vazir;
+}
+
+/* Post style
+--------------------------------------------------*/
 #post-card {
   width: 100%;
   height: 100%;
+  margin:auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   background-color: #191919;
-  box-shadow: 0 2px 5px 0 rgba(15, 12, 36,.16), 0 2px 10px 0 rgba(66, 133, 244,0.19);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
   cursor: pointer;
+  box-shadow:
+    0 2px 5px 0 rgba(15, 12, 36,.16),
+    0 2px 10px 0 rgba(66, 133, 244,0.19);
+  transition:
+    .3s transform cubic-bezier(.155,1.105,.295,1.12),
+    .3s box-shadow,
+    .3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
 }
 
 
-#btn-like, #btn-unlike{
-  color:#d20101;
-  background-color: #191919;
-  border:none;
+#btn-like, #btn-unlike {
+  color: #d20101;
+  background-color: transparent;
+  border: none;
+
 }
 
 
-#btn-unlike:focus:hover:active, #btn-like:hover:active:focus {
+#btn-unlike:focus:hover:active, 
+#btn-like:hover:active:focus {
   opacity: 0.8;
   border:none;
   -webkit-transform:scale(1.03);
@@ -79,8 +109,12 @@ body {
 
 }
 
-#post-card:active, #post-card:focus, #post-card:hover {
- box-shadow: 0 5px 11px 0 rgba(66, 133, 244,.18), 0 4px 15px 0 rgba(66, 133, 244,.15);
+#post-card:active, 
+#post-card:focus, 
+#post-card:hover {
+  box-shadow:
+    0 5px 11px 0 rgba(66, 133, 244, .18), 
+    0 4px 15px 0 rgba(66, 133, 244, .15);
   opacity: 0.8;
   -webkit-transform:scale(1.03);
   -moz-transform:scale(1.03);
@@ -90,21 +124,59 @@ body {
 }
 
 #post-card:not([disabled]):not(.disabled):active {
-  box-shadow: 0 5px 11px 0 rgba(66, 133, 244,.18),0 4px 15px 0 rgba(66, 133, 244,.15);
+  box-shadow: 
+    0 5px 11px 0 rgba(66, 133, 244, .18),
+    0 4px 15px 0 rgba(66, 133, 244, .15);
 }
 
-#post-card:not([disabled]):not(.disabled).active:focus, #post-card:not([disabled]):not(.disabled):active:focus {
-  box-shadow: 0 5px 11px 0 rgba(66, 133, 244,.18),0 4px 15px 0 rgba(66, 133, 244,.15);
+#post-card:not([disabled]):not(.disabled).active:focus, 
+#post-card:not([disabled]):not(.disabled):active:focus {
+  box-shadow: 
+    0 5px 11px 0 rgba(66, 133, 244, .18),
+    0 4px 15px 0 rgba(66, 133, 244, .15);
 }
 
 
-.view-count{
+.view-count {
   padding-left: 3px;
   margin-top: -6px;
 }
 
 
-/* Footer */
+/* Between footer and posts
+--------------------------------------------------*/
+#row-posts{
+  margin-bottom: 10rem;
+}
+
+
+/* Footer 
+--------------------------------------------------*/
 footer {
   margin-top: auto;
+}
+
+
+/* Fonts
+--------------------------------------------------*/
+@font-face {
+  font-family: Nosifer; 
+  src: url('../fonts/nosifer/Nosifer-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: VazirBold; 
+  src: url('../fonts/vazir/Vazir-Bold.ttf');
+}
+
+
+@font-face {
+  font-family: Vazir; 
+  src: url('../fonts/vazir/Vazir-Thin.eot');
+}
+
+@font-face {
+  font-family: ZenAntique;
+  src: url('../fonts/zen_antique/ZenAntiqueSoft-Regular.ttf');
 }
