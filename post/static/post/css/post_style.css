@@ -1,0 +1,228 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;	
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100rem;
+  min-height: 100%;
+	padding-top: 13rem;
+  color: #1D2228;
+  font-size: 16px;
+  text-align:center;
+}
+
+
+/* Post body
+--------------------------------------------------*/
+.panel-body{	
+  font-family: Vazir;
+  font-size: 1.1rem;  
+}
+
+
+/* General post style
+--------------------------------------------------*/ 
+#post-body {  
+  color: #4a4a4a;
+  direction: rtl;
+  text-align: justify;
+  width: 60em;
+  line-height: 3rem;
+  padding: 1em 2em 0;
+  margin: auto;  
+}
+
+
+/* Post title 
+--------------------------------------------------*/
+.pannel-title {
+  font-family: Vazir;
+  color: #363636;
+  font-weight: 700;
+  padding-bottom: 5rem;
+  font-size: 2.3rem;  
+}
+
+
+/* Post footer 
+--------------------------------------------------*/
+#post-footer, #share_post_link{	
+  background-color:transparent;	
+  padding-bottom:15%;
+  font-size: 18px;
+}
+
+
+#share_post_link{
+  font-size: 25px;
+}
+
+#btn-like, #btn-unlike{  
+  color: #d20101;
+  border: none;
+  background-color: transparent;
+}
+
+
+/* Post Tags  
+--------------------------------------------------*/
+.tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden; 
+  padding: 0;
+  padding-bottom: 20px;
+  padding-top: 190px;
+}
+
+.tags li{    
+	font-family: Vazir;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: 0;
+	line-height: 2;
+	float: right;
+}
+
+.tag {
+  background: #eee;
+  border-radius: 3px;
+  color: #797979;
+  height: 26px;
+  padding: 3px 20px 3px 23px;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+}
+
+.tag:hover {
+  background-color: #dedcdc;
+  color: #5d5c5c;
+  border-radius: 9px;
+}
+
+
+
+
+
+/* Comments 
+--------------------------------------------------*/
+#copied {
+  color: green;
+  display: none;
+  padding-right: 28px;
+  margin-top:-18px;
+  position: absolute;
+}
+
+
+
+/* Comments 
+--------------------------------------------------*/
+.comment-from-user {
+  position: absolute;
+  text-align: justify;
+}
+
+#comment-body {
+  padding: 2em 0 0 2em;
+}
+
+#icons {
+  margin: 0 0 0 -3em;
+}
+
+.comment-time {
+  margin: -3em 0 0 0;
+}
+
+#send-comment {
+  border-radius: 20px;
+}
+
+
+/* Timline 
+--------------------------------------------------*/
+.timeline-1 {
+	border-left: 3px solid #ad6666ba;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	background: rgb(187 101 101 / 9%);
+	margin: 0 auto;
+
+	position: relative;
+	padding: 0 0 0 50px;
+	list-style: none;
+	text-align: left;
+	max-width: 80%;
+}
+
+@media (max-width: 767px) {
+	.timeline-1 {
+			max-width: 98%;
+			padding: 25px;
+	}
+}
+
+.timeline-1 .event:before, .timeline-1 .event:after {
+	position: absolute;
+	display: block;
+	top: 0;
+}
+
+
+.timeline-1 .event:after {
+	-webkit-box-shadow: 0 0 0 3px #b56565;
+	box-shadow: 0 0 0 3px #b56565;
+	left: -55.8px;
+	background: #fff;
+	border-radius: 50%;
+	height: 9px;
+	width: 9px;
+	content: "";
+	top: 5px;
+}
+
+@media (max-width: 767px) {
+	.timeline-1 .event:after {
+			left: -31.8px;
+	}
+}
+
+
+.link-muted {
+	color: #aaa;
+}
+
+.link-muted:hover {
+	color: #424141;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* Footer 
+--------------------------------------------------*/
+footer {
+	margin-top: auto;
+}
+
+
+/* Fonts
+--------------------------------------------------*/
+@font-face {
+	font-family: Vazir;	
+  src: url('../fonts/vazir/Vazir-Thin.eot');
+}
+
+@font-face {
+  font-family: Nosifer; 
+  src: url('../../fonts/nosifer/Nosifer-Regular.ttf');
+}
+

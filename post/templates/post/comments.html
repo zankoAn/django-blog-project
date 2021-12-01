@@ -1,0 +1,121 @@
+<section>
+<div class="container my-5 py-5 text-dark">
+  <div class="row d-flex justify-content-center">
+    <!-- Separator -->
+    <div class="card-footer mb-5 border-3" id="footer-separator">Comments</div>
+    <div class="col-md-12 col-lg-10 col-xl-8">    
+      <form>
+          <div class="row">
+            
+            <!-- Name input -->
+            <div class="col">
+              <div class="form-outline mb-5">
+                <input type="text" id="form4Example1" class="form-control" placeholder="Name"/>                
+              </div>
+            </div>
+            
+            <!-- Email input -->
+            <div class="col">
+              <div class="form-outline mb-4">
+                <input type="email" id="form4Example2" class="form-control" placeholder="Email address" />                
+              </div>
+            </div>
+          </div>
+
+          <!-- Message input -->
+          <div class="d-flex flex-start w-100" id="comment">
+            <div class="form-outline w-100">
+              <textarea class="form-control" id="textAreaExample" rows="5" style="background: #fff;" placeholder="Write a comment"></textarea>
+            </div>
+          </div>
+          <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+          <script>
+            tinymce.init({ selector: '#textAreaExample', menubar: false});
+          </script>
+
+        <!-- Submit button -->
+        <div class="float-end pt-2">
+          <button type="button" class="btn btn-primary btn-lg" id="send-comemnt">Post comment</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Time line comments -->
+    <div class="timeline-1 ">
+
+    <!-- Loop on comments -->
+    {% for image in testa%}
+     <div class="event text-black card mb-3 mt-5 shadow bg-white rounded">
+        <div class="card-body p-4">
+          <div class="d-flex flex-start">
+            <a class="me-3" href="#">
+              <img class="rounded-circle shadow-1-strong" src="{{image}}" alt="avatar" width="65" height="65"/>
+            </a>
+
+            <!-- Body of the comment -->
+            <div class="flex-grow-1 flex-shrink-1">
+              <div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="mb-1">Simona Disa <span class="small">- 3 hours ago</span></p>
+                </div>
+                <p class="small">
+                  letters, as opposed to using 'Content here, content here',
+                  making it look like readable English.
+                </p>
+
+                <!-- Reply icons -->
+                <div class="d-flex  justify-content-between align-items-center" id="icons">
+                  <div class="d-flex align-items-center">
+                    <a href="#!" class="link-muted me-2 mt-4"><i class="bi bi-hand-thumbs-up-fill me-1"></i>132</a>
+                    <a href="#!" class="link-muted mt-4"><i class="bi bi-hand-thumbs-down-fill me-1"></i>15</a>
+                    <a href="#!" class="link-muted ms-2 mt-4"><i class="bi bi-chat-fill me-1"></i>5</a>
+                  </div>
+                    <a href="#!" class="link-muted"><i class="bi bi-reply-fill me-1"></i> Reply</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    <!-- If inner comments exists  -->
+    {% if inner_comment %}
+      
+      <!-- Time line  -->
+      <div class="timeline-1 justify-content-right" id="inner-comment">
+
+      <!-- Loop on inner comments -->
+      {% for com in comments_inner %} 
+        <div class="event text-black card mb-3 shadow bg-white rounded">
+          <div class="card-body p-2">
+            <div class="d-flex flex-start">
+              <a class="me-3" href="#">
+                <img class="rounded-circle shadow-1-strong" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(11).jpg" alt="avatar" width="65" height="65"/>
+              </a>
+
+              <!-- Body of the comment -->
+              <div class="flex-grow-1 flex-shrink-1">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-1">Simona Disa <span class="small">- 3 hours ago</span>
+                    </p>
+                  </div>
+
+                  <p class="small">
+                    letters, as opposed to using 'Content here, content here',
+                    making it look like readable English.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+  </div>  
+</div>
+</section>
