@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block js_script %}
+  <script src="{% static 'post/js/like.js' %}"></script>
+  <script src="{% static 'post/js/copy_clipboard.js' %}"></script>
+{% endblock js_script %}
+
+
+{% block custom_tag %}
+  <link rel="stylesheet" href="{% static 'post/css/post_style.css' %}">
+{% endblock custom_tag %}
+
+{% block content %}
+<div class="container">
+  <div class="row g-5">
+
+    <!-- Content -->
+    <div class="col">
+      <div class="row">
+        <div class="panel-headding" id="post-title">
+          <h3 class="pannel-title"> {{post.title}}</h3>
+        </div>
+        <div class="panel panel-primarry pb-1" id="post-body">
+          <div class="panel-body">
+            {{post.body | safe }}
+
+            <!-- TODO add daynamic tags -->
+            <ul class="tags">
+              <li><a href="#" class="tag"># react</a></li>
+              <li><a href="#" class="tag"># react router v6</a></li>
+              <li><a href="#" class="tag"># ری اکت</a></li>
+              <li><a href="#" class="tag"># ری اکت ورژن 6</a></li>
+            </ul>
+
+            <!-- Publish date  -->
+            <div class="card-footer row text-center" id="post-footer">
+              <div class="col">
+                <div class="bi bi-clock small text-secondary"> {{post.publish_date|date:' M d, Y' }}</div>
+              </div>
+
+              <!-- View -->
+              <div class="col">
+                <div class="bi bi-eye text-uppercase text-secondary"> {{ post.views }}</div>
+              </div>
+
+              <!-- Like count -->
+              <div class="col">
+                {% if request.user.is_authenticated%}
+                  {% if post.id in user_can_like %}
+                    <button type="button" id="btn-unlike" class="bi bi-heart" data-stat="{{ post.id }}"></button>
+                  {% else %}
+                    <button type="button" id="btn-like" class="bi bi-heart-fill" data-stat="{{ post.id }}"></button>
+                  {% endif %}               
+                  <label class="text-secondary" id="total-likes-{{ post.id }}"> {{ post.total_likes }}</label>
+                {% else %}
+                  <label class="bi bi-heart text-secondary"> {{ post.total_likes }}</label>
+                {% endif %}
+              </div>
+
+              <!-- Comment count -->
+              <div class="col">
+                <a href="#comment">
+                  <div class="bi bi-chat text-uppercase text-secondary"> {{ post.total_comments }}</div>
+                </a>
+              </div>
+
+              <!-- Share post link -->
+              <div class="col">
+                <button type="button" class="bi bi-link-45deg text-secondary" id="share_post_link" style="border:none">
+                </button>
+                <span id="copied">!Copied</span>
+              </div>
+
+              {% if request.user.is_authenticated and request.user.id == post.author.id %}
+                <!-- Post Settings -->
+                <div class="col">
+                  <div class="dropdown">
+                    <button class="btn bi bi-three-dots text-secondary" type="button" id="settings"
+                      data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <div class="text-info"></div>
+                    <ul class="dropdown-menu" id="romin" aria-labelledby="settings">
+                      <li><a class="dropdown-item bi bi-wrench" href="#"> Edit</a></li>
+                      <li><a class="dropdown-item bi bi-x-lg" href="#"> Delete</a></li>
+                      <li><a class="dropdown-item bi bi-plus-lg" href="#"> Add New</a></li>
+                    </ul>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'post/comments.html' %}
+
+{% endblock content %}
