@@ -1,13 +1,20 @@
 from pathlib import Path
+from os import environ
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-@y=50^lfj6g4r*4#yt7(@d@xg(5sdvbwt840x+d&ma(4w_tlc5'
+
+SECRET_KEY = environ.get('DJANGO_SECRET_KEY', 'DEFAULT_KEY')
 DEBUG = True
 ALLOWED_HOSTS = []
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 INSTALLED_APPS = [
     'post.apps.PostConfig',
     'accounts.apps.AccountsConfig',
+    'tinymce',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -15,7 +22,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -95,21 +101,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [Path.joinpath(BASE_DIR, "static"),]
+STATICFILES_DIRS = [Path.joinpath(BASE_DIR, 'static'),]
+#STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-MEDIA_ROOT = Path.joinpath(BASE_DIR, "media")
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-#STATIC_ROOT = "/static/"
-#STATICFILES_DIRS = [Path.joinpath(BASE_DIR, "static"),]
-
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'silver',
+        'height': 700,
+        'width': 1200,
+        'menubar': 'file edit insert format',
+
+        'plugins': '''advlist autolink lists link image preview codesample
+            fullscreen insertdatetime media 
+            advlist autolink lists link image charmap
+            print preview anchor searchreplace visualblocks code
+        ''',
+
+    'toolbar': '''
+        undo redo | fontsizeselect | bold italic underline | 
+        forecolor backcolor | alignleft alignright aligncenter alignjustify |
+        indent outdent | bullist numlist |
+        link image media | preview fullscreen codesample
+    ''',
+}
 
 
