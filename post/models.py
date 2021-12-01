@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.urls import reverse
 from uuid import uuid4
+from tinymce.models import HTMLField
 
 
 def dir_path(instance, file_name):
     """
         The path where the cover is stored.
         Like This:
-            media/images/user_xxx/2021/11/17/uuid4
+            media/images/user_xxx/2021-11-17-uuid4.fmt #file format
     """
 
     now = datetime.now()
@@ -20,8 +21,9 @@ def dir_path(instance, file_name):
     unique = uuid4().hex
     fmt = file_name.split(".")[-1]
 
-    return f"images/user_{user}/{year}/{month}/{day}/{unique}.{fmt}"
-    
+    path = f"images/user_{user}/{year}-{month}-{day}-{unique}.{fmt}"
+    return path
+
 
 class Post(models.Model):
 
@@ -30,7 +32,7 @@ class Post(models.Model):
         ("Draft", "draft ❌")
     )
 	
-	# <| Main |>
+	# < Main >
     author = models.ForeignKey(
         to=User,
         related_name="blog_post",
@@ -45,22 +47,21 @@ class Post(models.Model):
         max_length=150,
         unique=True)
 
-    body = models.TextField()
-
+    body = HTMLField()
+ 
     summary = models.CharField(
         max_length=250,
         blank=True,
         null=True)
+    
+    avatar = models.ImageField(upload_to=dir_path)
 
-    avatar = models.ImageField(
-        upload_to=dir_path)
-
-    # <| Date |>
+    # < Date >
     created_date = models.DateTimeField(auto_now_add=True)
     publish_date = models.DateField(auto_now_add=False)
     update_date = models.DateTimeField(auto_now=True) 
 
-    # <| Metadata |>
+    # < Metadata >
     category = models.ForeignKey(
         'Category',
         on_delete=models.CASCADE,
@@ -83,41 +84,50 @@ class Post(models.Model):
         blank=True, 
         default=0)
 
-    tags = models.ManyToManyField("Tag", blank=True)
+    tags = models.ManyToManyField(
+        "Tag",
+        blank=True)
 
 
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Blog Post'
 
+
     def __str__(self):
         return self.title
-
    
+
     def total_likes(self):
         return self.likes.count()
+
 
     def total_comments(self):
         return self.post_comment.count()
    
+
     def user_can_like(self, user):
         """
             Get all posts and send query to check 
             current user(request.user) can like or not!
 		"""
-
         liked_posts = []
         for post in self.objects.all():
             if not post.likes.filter(username=user):
                 liked_posts.append(post.id)
         return liked_posts
 
+
     def get_absolute_url(self):
         date = self.publish_date 
         return reverse("Posts:post", args=[date.year, date.month, date.day, self.id, self.slug])
+    
+
+    def thumbnail_preview(self):
+        from django.utils.html import format_html
+        return format_html(f'<img src="{self.avatar.url}" width="150" height="100" style="border-radius:5px;"/>')
 
  
-
 class Comment(models.Model):
     """ """
     author = models.ForeignKey(
